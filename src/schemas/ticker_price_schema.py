@@ -1,10 +1,24 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+import enum
 
 
-class TickerPriceAdd(BaseModel):
-    ticker: str = Field(min_length=1, max_length=10)
+class Ticker(str, enum.Enum):
+    BTC_USD = "btc_usd"
+    ETH_USD = "eth_usd"
+
+
+class TickerPriceBase(BaseModel):
+    ticker: Ticker
     price: float
-    timestamp: int = Field(gt=0)
+    timestamp: int
 
-class TickerPrice(TickerPriceAdd):
+
+class TickerPriceAdd(TickerPriceBase):
+    pass
+
+
+class TickerPriceRead(TickerPriceBase):
     id: int
+
+    class Config:
+        from_attributes = True

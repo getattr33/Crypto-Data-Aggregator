@@ -1,6 +1,3 @@
-
-
-
 from src.repositories.ticker_price_repository import TickerPriceRepository
 
 

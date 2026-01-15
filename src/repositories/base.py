@@ -1,9 +1,5 @@
-from asyncpg import UniqueViolationError
 from pydantic import BaseModel
-from sqlalchemy import delete, insert, select, update
-from sqlalchemy.exc import IntegrityError
-
-
+from sqlalchemy import desc, insert, select
 
 
 class BaseRepository:
@@ -22,8 +18,6 @@ class BaseRepository:
         query = select(self.model).filter_by(**filter_by)
         result = await self.session.execute(query)
         model = result.scalars().one_or_none()
-        if model is None:
-            return None
         return model
 
     async def get_one(self, **filter_by):
@@ -40,9 +34,11 @@ class BaseRepository:
         model = result.scalars().one()
         return model
 
-
-
-
-
-
-
+    async def get_latest(self, **filter_by):
+        query = (
+            select(self.model)
+            .filter_by(**filter_by)
+            .order_by(desc(self.model.timestamp))
+        )
+        result = await self.session.execute(query)
+        return result.scalars().first()

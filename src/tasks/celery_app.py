@@ -10,6 +10,6 @@ celery_app = Celery(
 celery_app.conf.beat_schedule = {
     "fetch_prices": {
         "task": "fetch_prices_task",
-        "schedule": 60,  
+        "schedule": 60,
     }
 }
