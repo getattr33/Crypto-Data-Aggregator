@@ -10,4 +10,5 @@ COPY . .
 
 ENV PYTHONPATH=/app
 
+# Используем массив, чтобы шел прямой запуск без оболочки
 CMD alembic upgrade head; python src/main.py

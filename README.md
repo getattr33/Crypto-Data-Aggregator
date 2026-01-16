@@ -122,15 +122,22 @@ cp .env.example .env
 
 MODE=PRODUCTION 
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=user
-DB_PASS=pass
-DB_NAME=crypto_db
+DB_HOST=localhost 
 
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASS=user
+DB_PORT=5432 
+
+DB_USER=user 
+
+DB_PASS=pass 
+
+DB_NAME=crypto_db 
+
+REDIS_HOST=localhost 
+
+REDIS_PORT=6379 
+
+REDIS_PASS=user 
+
 3. Сборка и запуск контейнеров
 Используем Docker Compose для поднятия всех сервисов:
 
